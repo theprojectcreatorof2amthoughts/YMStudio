@@ -1,0 +1,13 @@
+define msc_tool_init()
+    writescrn >^ "Music Studio Core tools loaded"
+    give yes
+done
+
+define msc_tool_status()
+    when msc_initialized == yes doit
+        writescrn >^ "YMStudio status: ready"
+    else
+        writescrn >^ "YMStudio status: stopped"
+    done
+    give yes
+done

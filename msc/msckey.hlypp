@@ -1,0 +1,19 @@
+stash key_pressed = no
+stash key_value = 0
+stash key_velocity = 100
+
+define key_press(note, velocity)
+    when note >= 0 both note <= 127 both velocity >= 1 both velocity <= 127 doit
+        key_value = note
+        key_velocity = velocity
+        key_pressed = yes
+        give yes
+    else
+        give no
+    done
+done
+
+define key_release()
+    key_pressed = no
+    give yes
+done

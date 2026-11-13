@@ -1,0 +1,33 @@
+stash track_count = 0
+stash selected_track = 0
+
+define track_add()
+    track_count = track_count + 1
+    selected_track = track_count
+    project_saved = no
+    give selected_track
+done
+
+define track_select(index)
+    when index >= 1 both index <= track_count doit
+        selected_track = index
+        give yes
+    else
+        give no
+    done
+done
+
+define track_remove_last()
+    when track_count > 0 doit
+        track_count = track_count - 1
+        when selected_track > track_count doit
+            selected_track = track_count
+        else
+            void
+        done
+        project_saved = no
+        give yes
+    else
+        give no
+    done
+done

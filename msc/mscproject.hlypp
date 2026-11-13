@@ -1,0 +1,46 @@
+stash project_name = "Untitled"
+stash project_bpm = 120
+stash project_saved = no
+stash project_time_signature_numerator = 4
+stash project_time_signature_denominator = 4
+
+define project_new()
+    project_name = "Untitled"
+    project_bpm = 120
+    project_saved = no
+    project_time_signature_numerator = 4
+    project_time_signature_denominator = 4
+    give yes
+done
+
+define project_set_name(value)
+    project_name = value
+    project_saved = no
+    give yes
+done
+
+define project_set_bpm(value)
+    when value >= 20 both value <= 300 doit
+        project_bpm = value
+        project_saved = no
+        give yes
+    else
+        give no
+    done
+done
+
+define project_set_time_signature(numerator, denominator)
+    when numerator >= 1 both numerator <= 32 both denominator >= 1 both denominator <= 32 doit
+        project_time_signature_numerator = numerator
+        project_time_signature_denominator = denominator
+        project_saved = no
+        give yes
+    else
+        give no
+    done
+done
+
+define project_save()
+    project_saved = yes
+    give yes
+done

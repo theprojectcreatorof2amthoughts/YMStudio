@@ -1,0 +1,31 @@
+stash master_volume = 100
+stash master_pan = 0
+stash master_mute = no
+
+define mixer_volume(value)
+    when value >= 0 both value <= 100 doit
+        master_volume = value
+        give yes
+    else
+        give no
+    done
+done
+
+define mixer_pan(value)
+    when value >= -100 both value <= 100 doit
+        master_pan = value
+        give yes
+    else
+        give no
+    done
+done
+
+define mixer_mute()
+    master_mute = yes
+    give yes
+done
+
+define mixer_unmute()
+    master_mute = no
+    give yes
+done

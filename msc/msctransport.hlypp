@@ -1,0 +1,62 @@
+stash playing = no
+stash recording = no
+stash position = 0
+stash loop_enabled = no
+stash metronome_enabled = no
+
+define transport_play()
+    playing = yes
+    give yes
+done
+
+define transport_pause()
+    playing = no
+    give yes
+done
+
+define transport_stop()
+    playing = no
+    recording = no
+    position = 0
+    give yes
+done
+
+define transport_record()
+    recording = yes
+    playing = yes
+    give yes
+done
+
+define transport_record_stop()
+    recording = no
+    give yes
+done
+
+define transport_set_position(value)
+    when value >= 0 doit
+        position = value
+        give yes
+    else
+        give no
+    done
+done
+
+define transport_loop_enable()
+    loop_enabled = yes
+    give yes
+done
+
+define transport_loop_disable()
+    loop_enabled = no
+    give yes
+done
+
+define transport_metronome_enable()
+    metronome_enabled = yes
+    give yes
+done
+
+define transport_metronome_disable()
+    metronome_enabled = no
+    give yes
+done

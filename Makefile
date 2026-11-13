@@ -1,9 +1,16 @@
-GYXX = gy++
-GYXXFLAGS = --xx-warn-all --xx-warn-extra -O2
+GYXX ?= gy++
+GYXXFLAGS ?= --xx-warn-all --xx-warn-extra -O2
+TARGET := ymstudio.lef
+MODULES := $(wildcard msc/*.hlypp) $(wildcard msc/*.yaq)
 
-all: YMStudio
+.PHONY: all clean rebuild
 
-YMStudio: main.ycpp 
-	$(GYXX) main.ycpp  $(GYXXFLAGS) -o ymstudio.lef
+all: $(TARGET)
 
-clean: rm -f ymstudio.lef
+$(TARGET): main.ycpp $(MODULES)
+	$(GYXX) main.ycpp $(GYXXFLAGS) -o $(TARGET)
+
+rebuild: clean all
+
+clean:
+	rm -f $(TARGET) $(TARGET).gypp.c

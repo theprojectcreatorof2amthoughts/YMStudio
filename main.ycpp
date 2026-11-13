@@ -6,6 +6,7 @@
 !#libinc "msc/mscmixer.hlypp"
 !#libinc "msc/mscaudio.hlypp"
 !#libinc "msc/mscexport.hlypp"
+!#libinc "msc/msckey.hlypp"
 !#adeq "msc/msctool.yaq"
 
-doit msc_exec
+msc_exec()

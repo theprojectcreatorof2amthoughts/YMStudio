@@ -1,0 +1,30 @@
+stash export_ready = no
+stash export_format = "WAV"
+stash export_sample_rate = 44100
+stash export_bit_depth = 16
+
+define export_configure(sample_rate, bit_depth)
+    when sample_rate >= 8000 both sample_rate <= 192000 both bit_depth == 16 doit
+        export_sample_rate = sample_rate
+        export_bit_depth = bit_depth
+        export_ready = no
+        give yes
+    else
+        give no
+    done
+done
+
+define export_prepare()
+    when audio_initialized == yes doit
+        export_ready = yes
+        give yes
+    else
+        export_ready = no
+        give no
+    done
+done
+
+define export_cancel()
+    export_ready = no
+    give yes
+done

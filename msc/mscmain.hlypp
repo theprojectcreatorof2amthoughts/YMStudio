@@ -1,0 +1,20 @@
+stash msc_initialized = no
+stash msc_version = "0.2.0"
+
+define msc_exec()
+    project_new()
+    audio_configure(44100, 512)
+    audio_init()
+    msc_initialized = yes
+    msc_tool_init()
+    writescrn >^ "YMStudio " .. msc_version .. " core initialized"
+    give yes
+done
+
+define msc_shutdown()
+    transport_stop()
+    audio_shutdown()
+    msc_initialized = no
+    writescrn >^ "YMStudio core stopped"
+    give yes
+done

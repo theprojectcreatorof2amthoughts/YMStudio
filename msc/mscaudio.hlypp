@@ -1,0 +1,24 @@
+stash audio_initialized = no
+stash audio_sample_rate = 44100
+stash audio_buffer_size = 512
+stash audio_output_channels = 2
+
+define audio_configure(sample_rate, buffer_size)
+    when sample_rate >= 8000 both sample_rate <= 192000 both buffer_size >= 16 both buffer_size <= 8192 doit
+        audio_sample_rate = sample_rate
+        audio_buffer_size = buffer_size
+        give yes
+    else
+        give no
+    done
+done
+
+define audio_init()
+    audio_initialized = yes
+    give yes
+done
+
+define audio_shutdown()
+    audio_initialized = no
+    give yes
+done

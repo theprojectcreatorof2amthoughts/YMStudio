@@ -1,0 +1,38 @@
+stash piano_note = 0
+stash piano_velocity = 100
+stash piano_active = no
+stash piano_channel = 1
+
+define piano_note_on(note, velocity)
+    when note >= 0 both note <= 127 both velocity >= 1 both velocity <= 127 doit
+        piano_note = note
+        piano_velocity = velocity
+        piano_active = yes
+        give yes
+    else
+        give no
+    done
+done
+
+define piano_note_off()
+    piano_active = no
+    give yes
+done
+
+define piano_velocity_set(value)
+    when value >= 1 both value <= 127 doit
+        piano_velocity = value
+        give yes
+    else
+        give no
+    done
+done
+
+define piano_channel_set(value)
+    when value >= 1 both value <= 16 doit
+        piano_channel = value
+        give yes
+    else
+        give no
+    done
+done
