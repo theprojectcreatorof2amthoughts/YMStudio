@@ -1,0 +1,85 @@
+## Mixer channel and effect parameter model.
+## This module stores parameters; it does not yet process audio.
+
+stash dsp_reverb_enabled = no
+stash dsp_reverb_room = 50
+stash dsp_reverb_mix = 20
+stash dsp_delay_enabled = no
+stash dsp_delay_time = 500
+stash dsp_delay_feedback = 25
+stash dsp_delay_mix = 20
+stash dsp_compressor_enabled = no
+stash dsp_compressor_threshold = -12
+stash dsp_compressor_ratio = 4
+stash dsp_compressor_mix = 100
+stash dsp_master_gain = 100
+
+define dsp_reverb_enable()
+    dsp_reverb_enabled = yes
+    give yes
+done
+
+define dsp_reverb_disable()
+    dsp_reverb_enabled = no
+    give yes
+done
+
+define dsp_reverb_set(room, mix)
+    when room >= 0 both room <= 100 both mix >= 0 both mix <= 100 doit
+        dsp_reverb_room = room
+        dsp_reverb_mix = mix
+        give yes
+    else
+        give no
+    done
+done
+
+define dsp_delay_enable()
+    dsp_delay_enabled = yes
+    give yes
+done
+
+define dsp_delay_disable()
+    dsp_delay_enabled = no
+    give yes
+done
+
+define dsp_delay_set(time_value, feedback, mix)
+    when time_value >= 1 both time_value <= 4000 both feedback >= 0 both feedback <= 100 both mix >= 0 both mix <= 100 doit
+        dsp_delay_time = time_value
+        dsp_delay_feedback = feedback
+        dsp_delay_mix = mix
+        give yes
+    else
+        give no
+    done
+done
+
+define dsp_compressor_enable()
+    dsp_compressor_enabled = yes
+    give yes
+done
+
+define dsp_compressor_disable()
+    dsp_compressor_enabled = no
+    give yes
+done
+
+define dsp_compressor_set(threshold, ratio)
+    when threshold >= -60 both threshold <= 0 both ratio >= 1 both ratio <= 20 doit
+        dsp_compressor_threshold = threshold
+        dsp_compressor_ratio = ratio
+        give yes
+    else
+        give no
+    done
+done
+
+define dsp_master_set_gain(value)
+    when value >= 0 both value <= 200 doit
+        dsp_master_gain = value
+        give yes
+    else
+        give no
+    done
+done

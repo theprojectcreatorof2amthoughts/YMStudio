@@ -1,0 +1,92 @@
+## Arrangement and clip-editing model.
+
+stash arrangement_clip_count = 0
+stash arrangement_selected_clip = 0
+stash arrangement_clip_start = 0
+stash arrangement_clip_length = 4
+stash arrangement_clip_track = 1
+stash arrangement_clip_muted = no
+stash arrangement_clip_name = "MIDI Clip"
+stash arrangement_loop_start = 0
+stash arrangement_loop_end = 16
+stash arrangement_loop_enabled = no
+
+define arrangement_add_clip()
+    when track_count > 0 doit
+        arrangement_clip_count = arrangement_clip_count + 1
+        arrangement_selected_clip = arrangement_clip_count
+        arrangement_clip_start = transport_position
+        arrangement_clip_track = selected_track
+        arrangement_clip_length = 4
+        arrangement_clip_muted = no
+        project_saved = no
+        give arrangement_selected_clip
+    else
+        give no
+    done
+done
+
+define arrangement_select_clip(index)
+    when index >= 1 both index <= arrangement_clip_count doit
+        arrangement_selected_clip = index
+        give yes
+    else
+        give no
+    done
+done
+
+define arrangement_set_clip_start(value)
+    when value >= 0 doit
+        arrangement_clip_start = value
+        project_saved = no
+        give yes
+    else
+        give no
+    done
+done
+
+define arrangement_set_clip_length(value)
+    when value >= 1 both value <= 1024 doit
+        arrangement_clip_length = value
+        project_saved = no
+        give yes
+    else
+        give no
+    done
+done
+
+define arrangement_set_clip_track(value)
+    when value >= 1 both value <= track_count doit
+        arrangement_clip_track = value
+        project_saved = no
+        give yes
+    else
+        give no
+    done
+done
+
+define arrangement_toggle_clip_mute()
+    when arrangement_clip_muted == yes doit
+        arrangement_clip_muted = no
+    else
+        arrangement_clip_muted = yes
+    done
+    project_saved = no
+    give yes
+done
+
+define arrangement_set_loop(start_value, end_value)
+    when start_value >= 0 both end_value > start_value doit
+        arrangement_loop_start = start_value
+        arrangement_loop_end = end_value
+        arrangement_loop_enabled = yes
+        give yes
+    else
+        give no
+    done
+done
+
+define arrangement_disable_loop()
+    arrangement_loop_enabled = no
+    give yes
+done

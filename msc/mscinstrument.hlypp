@@ -1,0 +1,70 @@
+## Instrument and synthesizer voice configuration model.
+
+stash instrument_name = "Init Piano"
+stash instrument_waveform = "sine"
+stash instrument_octave = 0
+stash instrument_attack = 10
+stash instrument_decay = 250
+stash instrument_sustain = 75
+stash instrument_release = 300
+stash instrument_master_tune = 0
+stash instrument_polyphony = 64
+
+define instrument_set_name(value)
+    instrument_name = value
+    project_saved = no
+    give yes
+done
+
+define instrument_set_waveform(value)
+    when value == "sine" either value == "triangle" either value == "saw" either value == "square" doit
+        instrument_waveform = value
+        project_saved = no
+        give yes
+    else
+        give no
+    done
+done
+
+define instrument_set_octave(value)
+    when value >= -4 both value <= 4 doit
+        instrument_octave = value
+        project_saved = no
+        give yes
+    else
+        give no
+    done
+done
+
+define instrument_set_envelope(attack, decay, sustain, release)
+    when attack >= 0 both attack <= 10000 both decay >= 0 both decay <= 10000 both sustain >= 0 both sustain <= 100 both release >= 0 both release <= 20000 doit
+        instrument_attack = attack
+        instrument_decay = decay
+        instrument_sustain = sustain
+        instrument_release = release
+        project_saved = no
+        give yes
+    else
+        give no
+    done
+done
+
+define instrument_set_tune(value)
+    when value >= -100 both value <= 100 doit
+        instrument_master_tune = value
+        project_saved = no
+        give yes
+    else
+        give no
+    done
+done
+
+define instrument_set_polyphony(value)
+    when value >= 1 both value <= 256 doit
+        instrument_polyphony = value
+        project_saved = no
+        give yes
+    else
+        give no
+    done
+done

@@ -1,0 +1,152 @@
+## YMStudio GUI application state and command router.
+## Rendering and native input are supplied by the YPP platform host.
+
+stash gui_initialized = no
+stash gui_theme = "midnight"
+stash gui_active_view = "arrangement"
+stash gui_left_panel_visible = yes
+stash gui_browser_visible = yes
+stash gui_mixer_visible = yes
+stash gui_keyboard_visible = no
+stash gui_snap_enabled = yes
+stash gui_snap_division = 16
+stash gui_zoom = 100
+stash gui_status = "Ready"
+stash gui_dialog = "none"
+
+define gui_init()
+    gui_initialized = yes
+    gui_status = "Ready"
+    give yes
+done
+
+define gui_set_view(value)
+    when value == "arrangement" either value == "piano" either value == "mixer" either value == "browser" doit
+        gui_active_view = value
+        give yes
+    else
+        give no
+    done
+done
+
+define gui_toggle_left_panel()
+    when gui_left_panel_visible == yes doit
+        gui_left_panel_visible = no
+    else
+        gui_left_panel_visible = yes
+    done
+    give yes
+done
+
+define gui_toggle_browser()
+    when gui_browser_visible == yes doit
+        gui_browser_visible = no
+    else
+        gui_browser_visible = yes
+    done
+    give yes
+done
+
+define gui_toggle_mixer()
+    when gui_mixer_visible == yes doit
+        gui_mixer_visible = no
+    else
+        gui_mixer_visible = yes
+    done
+    give yes
+done
+
+define gui_toggle_keyboard()
+    when gui_keyboard_visible == yes doit
+        gui_keyboard_visible = no
+    else
+        gui_keyboard_visible = yes
+    done
+    give yes
+done
+
+define gui_set_zoom(value)
+    when value >= 25 both value <= 400 doit
+        gui_zoom = value
+        give yes
+    else
+        give no
+    done
+done
+
+define gui_set_snap(value)
+    when value == 1 either value == 2 either value == 4 either value == 8 either value == 16 either value == 32 doit
+        gui_snap_division = value
+        gui_snap_enabled = yes
+        give yes
+    else
+        give no
+    done
+done
+
+define gui_snap_disable()
+    gui_snap_enabled = no
+    give yes
+done
+
+define gui_show_dialog(value)
+    gui_dialog = value
+    give yes
+done
+
+define gui_close_dialog()
+    gui_dialog = "none"
+    give yes
+done
+
+define gui_set_status(value)
+    gui_status = value
+    give yes
+done
+
+define gui_command(value)
+    when value == "play" doit
+        transport_play()
+        gui_status = "Playing"
+    else
+        when value == "pause" doit
+            transport_pause()
+            gui_status = "Paused"
+        else
+            when value == "stop" doit
+                transport_stop()
+                gui_status = "Stopped"
+            else
+                when value == "record" doit
+                    transport_record()
+                    gui_status = "Recording"
+                else
+                    when value == "new_track" doit
+                        track_add()
+                        gui_status = "Track added"
+                    else
+                        when value == "new_clip" doit
+                            arrangement_add_clip()
+                            gui_status = "Clip created"
+                        else
+                            when value == "save" doit
+                                project_save()
+                                gui_status = "Project saved"
+                            else
+                                gui_status = "Unknown command"
+                                give no
+                            done
+                        done
+                    done
+                done
+            done
+        done
+    done
+    give yes
+done
+
+define gui_shutdown()
+    gui_initialized = no
+    gui_dialog = "none"
+    give yes
+done

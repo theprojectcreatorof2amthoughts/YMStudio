@@ -7,6 +7,10 @@
 !#libinc "msc/mscaudio.hlypp"
 !#libinc "msc/mscexport.hlypp"
 !#libinc "msc/msckey.hlypp"
+!#libinc "msc/mscgui.hlypp"
+!#libinc "msc/mscarrangement.hlypp"
+!#libinc "msc/mscdsp.hlypp"
+!#libinc "msc/mscinstrument.hlypp"
 !#adeq "msc/msctool.yaq"
 
 msc_exec()
