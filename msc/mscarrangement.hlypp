@@ -15,7 +15,7 @@ define arrangement_add_clip()
     when track_count > 0 doit
         arrangement_clip_count = arrangement_clip_count + 1
         arrangement_selected_clip = arrangement_clip_count
-        arrangement_clip_start = transport_position
+        arrangement_clip_start = position
         arrangement_clip_track = selected_track
         arrangement_clip_length = 4
         arrangement_clip_muted = no
