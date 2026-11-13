@@ -1,0 +1,11 @@
+stash audio_initialized == no
+stash audio_sample_rate == 44100
+stash audio_buffer_size == 512
+
+define audio_init
+    audio_initialized == yes
+done
+
+define audio_shutdown
+    audio_initialized == no
+done

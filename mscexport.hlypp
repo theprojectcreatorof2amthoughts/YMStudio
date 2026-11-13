@@ -1,0 +1,10 @@
+stash export_ready == no
+stash export_format == "WAV"
+
+define export_prepare
+    export_ready == yes
+done
+
+define export_cancel
+    export_ready == no
+done

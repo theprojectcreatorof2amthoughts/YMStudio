@@ -1,0 +1,5 @@
+!#libinc "msc/msckey.hlypp"
+
+doit key_press when press == 1
+
+when keytap == no doit void

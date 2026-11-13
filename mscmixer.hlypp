@@ -1,0 +1,19 @@
+stash master_volume == 100
+stash master_pan == 0
+stash master_mute == no
+
+define mixer_volume
+    master_volume == input_define
+done
+
+define mixer_pan
+    master_pan == input_define
+done
+
+define mixer_mute
+    master_mute == yes
+done
+
+define mixer_unmute
+    master_mute == no
+done

@@ -1,0 +1,13 @@
+stash project_name == "Untitled"
+stash project_bpm == 120
+stash project_saved == no
+
+define project_new
+    project_name == "Untitled"
+    project_bpm == 120
+    project_saved == no
+done
+
+define project_save
+    project_saved == yes
+done

@@ -1,0 +1,16 @@
+stash key_pressed == no
+stash key_value == void
+
+define key_press
+    when press == 1 doit
+        give key_pressed == yes
+    else
+        give key_pressed == no
+    done
+
+    when keytap == no doit void
+done
+
+define key_release
+    give key_pressed == no
+done
