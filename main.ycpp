@@ -1,0 +1,11 @@
+!#libinc "msc/mscmain.hlypp"
+!#libinc "msc/mscproject.hlypp"
+!#libinc "msc/msctransport.hlypp"
+!#libinc "msc/msctrack.hlypp"
+!#libinc "msc/mscpiano.hlypp"
+!#libinc "msc/mscmixer.hlypp"
+!#libinc "msc/mscaudio.hlypp"
+!#libinc "msc/mscexport.hlypp"
+!#adeq "msc/msctool.yaq"
+
+doit msc_exec
