@@ -1,6 +1,6 @@
 # YMStudio
 
-YMStudio is an experimental digital-audio-workstation application written in YCPP/YLANG++.
+YMStudio is an experimental digital-audio-workstation application written in YXX/Y++.
 
 ## Language rule
 
